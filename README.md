@@ -4,7 +4,7 @@ I have gathered here all the important information what every ITPro should know 
 From ITPro's perspective, there are some severe design issues and problems with UWD's. 
 
 ## What is Universal Windows Driver
-From ITPro's perspective the most important feature of UWD's is traditional Windows driver's ability to download and install an application (HSA) from Microsoft Store.
+Compared to the traditional Windows drivers, the most important feature of UWD's is driver's ability to trigger a download and installation of a app (HSA) from Microsoft Store that the driver needs.
 UWD has two parts,
 1. "Traditional" driver (.inf format) and
 2. App in Microsoft Store.
