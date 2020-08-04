@@ -84,8 +84,9 @@ Let's use "Intel Grapchics Command Center" as an example.
 ```https://www.microsoft.com/en-us/p/intel-graphics-command-center/9plfnlnt3g5g```
 6. Now we need to create a working link for Store for Business/Education and open it in a browser while signed in the Store for Business/Education as a Store admin.
 ```https://educationstore.microsoft.com/en-us/store/details/intel-graphics-command-center/9plfnlnt3g5g```
-7. Select License: Offline and "Get the app"
-8. Click "Manage", then "Products and Services"
-9. On the right of the Intel Grapchics Control Center, click three dots menu "..." and Download for offline use
-10. Download appxbundle and prerequisities
+7. Change License type to "Offline" and click "Get the app" (**Notice!** If there is no offline licensing available software vendor has opted out and you cannot download install package.)
+8. You will get a popup that software has been added to your inventory. Click "Close" 
+9. Click "Manage"
+(You will be taken straight to the download page, which you can find later from "Products and Services". On the right of the Intel Grapchics Control Center, click three dots menu "..." and Download for offline use)
+11. Download appx(bundle) for the HSA as well as for all the required frameworks. License is probably not needed.
 
