@@ -11,6 +11,7 @@ UWD has two parts,
 
 Microsoft has pretty good documentation for developers how UWD and HSA's are designed work. It might be a good idea to take a look at it.
 
+[Microsoft Docs: INF AddSoftware Directive](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/inf-addsoftware-directive)
 [Microsoft Docs: Pairing a driver with a Universal Windows Platform (UWP) app](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/pairing-app-and-driver-versions)
 
 When it comes to the driver installations and management, for UWD's we have two different worlds. Driver in .inf format and it's Store counterpart.
