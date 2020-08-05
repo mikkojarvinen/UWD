@@ -53,18 +53,32 @@ To reproduce this bug, you'll need a computer which has at least one device with
 7. Sort by Event ID, find Event 809, select it, sort by Date and Time. You will see Event IDs 809 and 819 that clearly tell you HSA's have been deleted
 8. See also `C:\Program Files\WindowsApps\DeletedAllUserPackages` to find out HSA's have been deleted
 
+### How to manually fix deleted HSA's
+You can force Windows to download and install HSA again. You will have to remove the InstalledPfn registry "label" for that HSA and let Windows install the device again:
+1. Remove HSA's registry value under `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns`
+2. From device manager, find the device that uses UWD driver.
+3. Uninstall device and driver
+4. Scan for hardware changes
+5. Windows will find the device again, installs the driver and downloads and installs HSA back to the computer
+
 ## UHFT - UWD HSA Fix Tool (Coming soon!)
-You can use UHFT (UWD HSA Fix Tool) - yes it is an acronym monster :-) - which will detect any missing HSA's in Windows and install them. You will have to get the files for the installation packages by yourself because distributing them is not allowed. There is a few examples and .stub files to get you started with the idea. UHFT is just surprisingly simple PowerShell script so you can modify it for for your needs. One idea is to create MEMCM compliance rule for HSA's.
+You can use UHFT (UWD HSA Fix Tool) to detect any missing HSA's in Windows and install them. You will have to get the files for the installation packages by yourself because distributing them is not allowed. There is a few examples and empty filenames to get you started with the idea. UHFT is just surprisingly simple PowerShell script so you can modify it for for your needs. It is possible to create MEMCM compliance rule for HSA's to only detect how many devices you have that are missing HSA's.
 
 UHFT does not care about on computer models. It checks the missing HSA's that should be installed on the system so it is safe to run on all your systems.
 
-## Sideloading Apps and MEMCM
+## Sideloading Apps
+You can sideload Store Apps (and HSA's) into Windows.
+### MEMCM
 If you use MEMCM (ConfigMgr) for Windows deployments or just offline service your images, you can sideload Apps with dism.exe into Windows.
 You can prevent Apps being deleted during first logon by changing the sideloading policy registry setting in Windows image to "Allow all trusted apps" and giving dism a switch REGION=ALL.
 While this method works also for HSA's, it does not help with automated driver installations as you are not giving any commands and **you will still need the install packages for the HSA's**.
 Sune Thomsens has written an excellent blog about this topic: (https://www.osdsune.com/home/blog/2020/deploy-uwp-osd)
+### Online system
+You can add HSA's also in live online Windows. Jus use dism the following way:
+```dism.exe /online /Add-ProvisionedAppxPackage /PackagePath:".\<package appx/appxbundle>" /SkipLicense /Region:"all"```
+Have all the Don't worry 
 
-### How to get Store link and download HSA install package
+## How to get Store link and download HSA install package
 As mentioned, although you cannot use Store search to find a HSA, you can find them using a Store "deep link".
 Without access to the HSA in Store, you cannot download the offline installation package.
 You can, however, work your way from the driver .inf file using PackageFamilyName to get the actual app link for the Store.
@@ -89,5 +103,5 @@ Let's use "Intel Grapchics Command Center" as an example.
 8. You will get a popup that software has been added to your inventory. Click "Close" 
 9. Click "Manage"
 (You will be taken straight to the download page, which you can find later from "Products and Services". On the right of the Intel Grapchics Control Center, click three dots menu "..." and Download for offline use)
-11. Download appx(bundle) for the HSA as well as for all the required frameworks. License is probably not needed.
+11. Download appx(bundle) for the HSA as well as for all the required frameworks. License is not needed for HSA's.
 
