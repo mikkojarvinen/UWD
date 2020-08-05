@@ -75,8 +75,10 @@ While this method works also for HSA's, it does not help with automated driver i
 Sune Thomsens has written an excellent blog about this topic: (https://www.osdsune.com/home/blog/2020/deploy-uwp-osd)
 ### Online system
 You can add HSA's also in live online Windows. Jus use dism the following way:
-```dism.exe /online /Add-ProvisionedAppxPackage /PackagePath:".\<package appx/appxbundle>" /SkipLicense /Region:"all"```
-Have all the Don't worry 
+```
+dism.exe /online /Add-ProvisionedAppxPackage /PackagePath:".\<package appx/appxbundle>" /SkipLicense /Region:"all"
+```
+Put all the dependency packages in the same folder as HSA. Don't worry about the license.
 
 ## How to get Store link and download HSA install package
 As mentioned, although you cannot use Store search to find a HSA, you can find them using a Store "deep link".
