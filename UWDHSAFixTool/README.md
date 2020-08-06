@@ -18,9 +18,9 @@ Run the script with administrative premissions or as a local system.
 powershell.exe /executionpolicy bypass .\Repair-UWDApps.ps1
 ```
 To install the missing HSA's, under folder `Packages` you will need to have  a folder named **Package Family Name** and in that folder 
-1. file `install.ps1` which will be run if package needs to be installed
-2. Install package for the HSA
-3. Dependency packages
+1. file `install.ps1` which will be run if package needs to be installed,
+2. installation package for the HSA and
+3. dependency packages.
 
 Just see the examples. The files already under `Packages` folder are just placeholders giving you the idea what is needed.
 
