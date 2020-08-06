@@ -5,7 +5,7 @@ UHFT simply reads the values under registry key
 ```
 HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns
 ```
-and checks is a corresponding HSA is installed on the system.
+and checks if a corresponding HSA is installed or missing on the system.
 
 ## Detect only
 Run `Is-HSACompliant.ps1` and it will return "Yes" the system is OK. If the system is missing one or more previously installed HSA's the script will return "No".
@@ -29,7 +29,7 @@ Detecting HSA's that have never been installed but should be installed is tricky
 ```
 Get-ChildItem -Path "C:\Windows\System32\DriverStore\FileRepository\*.inf" -Recurse | Select-String "pfn://" -List | Select Path, Filename
 ```
-The problem with this detection method is that a driver files can exist in DriverStore but Windows does not necessarily use the drivers at all.
+The problem with this detection method is that a driver files can exist in DriverStore but Windows does not necessarily use the drivers at all. That is why this detection method is not being used in the script.
 
 ### Other Apps
-Additionally computer manufacturers have specific hardware-related apps for specific model. Those apps are not HSA's at all and should be installed as any (modern/store) application.
+Additionally computer manufacturers have specific hardware-related apps for specific model. Those apps are not HSA's at all and should be installed as any (modern/store) application. There is no way to automatically detect if these apps are missing. You will just have to know these by yourself. :-)
