@@ -1,0 +1,1 @@
+Add-AppxProvisionedPackage -SkipLicense -Online -PackagePath "$PSScriptRoot\WavesAudio.MaxxAudioProforDell2020_3.0.66.0_neutral___fh4rh281wavaa.AppxBundle"

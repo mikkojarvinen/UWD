@@ -1,0 +1,1 @@
+Add-AppxProvisionedPackage -SkipLicense -Online -PackagePath "$PSScriptRoot\AppUp.IntelGraphicsExperience_1.100.2731.0_neutral___8j3eq9eme6ctt.AppxBundle"
