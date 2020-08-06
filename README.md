@@ -9,12 +9,13 @@ UWD has two parts,
 1. "Traditional" driver (.inf format) and
 2. App in Microsoft Store.
 
-Microsoft has pretty good documentation for developers how UWD and HSA's are designed work. It might be a good idea to take a look at it.
+Microsoft has pretty good documentation for developers how UWD and HSA's are designed work. It might be a good idea to take a quick look at the docs.
 
 [Microsoft Docs: INF AddSoftware Directive](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/inf-addsoftware-directive)
+
 [Microsoft Docs: Pairing a driver with a Universal Windows Platform (UWP) app](https://docs.microsoft.com/en-us/windows-hardware/drivers/install/pairing-app-and-driver-versions)
 
-When it comes to the driver installations and management, for UWD's we have two different worlds. Driver in .inf format and it's Store counterpart.
+When it comes to the driver installation and management, for UWD's we have two different worlds. Driver in .inf format and it's Store counterpart.
 
 ![UWD and HSA](https://github.com/mikkojarvinen/UWD/blob/master/UWD-HSA.png "UWD and HSA")
 
@@ -23,18 +24,18 @@ To keep it short, if a driver's .inf file has the following lines in it:
 SoftwareType=2
 SoftwareId=pfn://<PackageFamilyName>
 ```
-Windows will automatically reach out to Microsoft Store, download and install the driver's HSA. This happens hidden in the background and the app will be installed for the system.
+Windows will automatically reach out to Microsoft Store, download and install the driver's HSA. This happens hidden in the background and the app will be installed for the system. Other option is to install HSA manually to Windows either in offline or online mode. In that case you will need the install packages.
 When a user signs in, Windows will populate a "copy" of the HSA app for the user just like it happens with all modern applications.
 
 ### HSA's in Microsoft Store
 Although HSA's are just Windows (modern) apps, they are a bit different.
-1. **Hidden**. You cannot find HSA's using Store's search. (But there is a way to find them, see below how to download a HSA from Store.)
+1. **Hidden**. You cannot find HSA's using Store's search. (But there is a way to find them if you have Store "deep link". See below how to download a HSA from Store.)
 2. **Originally only in Store**. Microsoft had a policy that didn't allow computer manufacturers to distribute install packages for HSA's. This policy has been overturned and after August 2020 you can download HSA install packages from computer manufacturer's driver downloads web pages.
 3. **Not for users**. Because HSA is meant for a specific device driver, it should never be installed by or for the user. Only install - or provision to use fancier term - to a device.
-This brings us a few problems. How can you install HSA manually? What is HSA installation fails? What if the computer does not have network connection or access to the Microsoft Store?
+This brings us a few problems. How can you install HSA manually? What if HSA installation fails? What if the computer does not have network connection or access to the Microsoft Store?
 
 ### HSA automatic updates from Microsoft Store
-If Windows has access to the Microsoft Store, installed HSA's will be automatically updated if newer version is available on Store. It does not matter if HSA has been installed the "natural way" during UWD install process, sideloaded to the offline image or (re)installed to an online live system from .appx\[bundle\]. For you servicing HSA's this means you don't have to worry too much about deploying the latest version. This is good news.
+If Windows has access to the Microsoft Store, installed HSA's will be automatically updated if newer version is available on Store. It does not matter if HSA has been installed the "natural way" during UWD install process, sideloaded to the offline image or (re)installed to an online live system from .appx\[bundle\]. If you are offline servicing HSA's this means you don't have to worry too much about deploying the latest version. This is good news.
 
 ## Windows has a bug: HSA's will be deleted!
 There is a bug in Windows 1809 and newer, which affects Windows and driver installations. _During first user logon Windows will delete external sideloaded apps._ This means that **all HSA's will also be deleted** and the driver will be broken. How badly, depends on the driver. You might just end up missing a somewhat useless App or in the worst case the functionality of the driver depends on the existence of HSA.
@@ -70,7 +71,9 @@ You can force Windows to download and install HSA again. You will have to remove
 4. Scan for hardware changes
 5. Windows will find the device again, installs the driver and downloads and installs HSA back to the computer
 
-## UHFT - UWD HSA Fix Tool (Coming soon!)
+## UHFT - UWD HSA Fix Tool
+[UHFT - UWD HSA Fix Tool](https://github.com/mikkojarvinen/UWD/tree/master/UWDHSAFixTool)
+
 You can use UHFT (UWD HSA Fix Tool) to detect any missing HSA's in Windows and install them. You will have to get the files for the installation packages by yourself. There are few examples and empty filenames to get you started with the idea. UHFT is just a simple PowerShell script so you can modify it for for your needs. It is possible to create MEMCM compliance rule for HSA's to only detect how many devices you have that are missing HSA's.
 
 UHFT does not care about on computer models. It simply checks the missing HSA's that should be installed on the system so it is safe to run it on all your systems.
@@ -100,21 +103,20 @@ Using that link in Store for Business or Store for Education, you can finally do
 **Notice!** If application in Store does not allow offline installations, then you are pretty much out of luck. One such app is "ST Microelectronics Dell Free Fall Data Protection".
 
 Let's use "Intel Grapchics Command Center" as an example.
-1. In Intel UHD Graphics drivers, there is (among others) a driver file `igcc_dch.inf`. If you open the file and search for `pfn://` you will find the following PackageFamilyName link.
+1. In (one version of) Intel UHD Graphics drivers, there is (among others) a driver file `igcc_dch.inf`. If you open the file and search for `pfn://` you will find the following PackageFamilyName link (defined in Strings section).
 ```pfn://AppUp.IntelGraphicsExperience_8j3eq9eme6ctt```
 2. Next we need a Windows with Store App. We need to create the following string and open it with in Windows' Run... command (Win+R)
 ```ms-windows-store://pdp/?PFN=AppUp.IntelGraphicsExperience_8j3eq9eme6ctt```
-3. Store opens the Intel Graphics Command Center app. In the App details, just next right to the review starts, find "Share" and click it
-4. Click "Copy link"
-5. Now we have a link to the Store with ProductId. Paste it in the web browser (InPrivate mode preferred)
+3. Store App opens an shows us the Intel Graphics Command Center app. In the App details, just next to and on the right hand size of the review starts, click "Share".
+4. Click "Copy link".
+5. Now we have a link to the Store with ProductId. Paste it in the web browser (InPrivate mode preferred).
 ```https://www.microsoft.com/store/productId/9PLFNLNT3G5G```
 5. See the URL will change to the following.
 ```https://www.microsoft.com/en-us/p/intel-graphics-command-center/9plfnlnt3g5g```
 6. Now we need to create a working link for Store for Business/Education and open it in a browser while signed in the Store for Business/Education as a Store admin.
 ```https://educationstore.microsoft.com/en-us/store/details/intel-graphics-command-center/9plfnlnt3g5g```
-7. Change License type to "Offline" and click "Get the app" (**Notice!** If there is no offline licensing available software vendor has opted out and you cannot download install package.)
-8. You will get a popup that software has been added to your inventory. Click "Close" 
-9. Click "Manage"
-(You will be taken straight to the download page, which you can find later from "Products and Services". On the right of the Intel Grapchics Control Center, click three dots menu "..." and Download for offline use)
+7. Change License type to "Offline" and click "Get the app" (**Notice!** If there is no offline licensing available, software vendor has opted out to allow offline installs and you cannot download install package.)
+8. You will get a popup that software has been added to your inventory. Click "Close".
+9. Click "Manage".
+(You will be taken straight to the download page, which you can find later from "Products and Services". On the right of the Intel Grapchics Control Center, click three dots menu "..." and Download for offline use.)
 11. Download appx(bundle) for the HSA as well as for all the required frameworks. License is not needed for HSA's.
-
