@@ -53,6 +53,15 @@ To reproduce this bug, you'll need a computer which has at least one device with
 7. Sort by Event ID, find Event 809, select it, sort by Date and Time. You will see Event IDs 809 and 819 that clearly tell you HSA's have been deleted
 8. See also `C:\Program Files\WindowsApps\DeletedAllUserPackages` to find out HSA's have been deleted
 
+### Detecting deleted HSA's
+When Windows installs a UWD driver, it will use the pfn:// link in driver .inf file to get driver's HSA from the Store. In the background, HSA is downloaded and installed. After a successful installation Windows adds a DWORD registry value with a Package Family Name and value "1" under registry key
+```
+HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns
+```
+(InstalledPfns key does not exist if there is no HSA installed on the system.)
+If there is a Package Family Name value in registry, but no installed app with the same Package Family Name, we know the app is missing.
+
+
 ### How to manually fix deleted HSA's
 You can force Windows to download and install HSA again. You will have to remove the InstalledPfn registry "label" for that HSA and let Windows install the device again:
 1. Remove HSA's registry value under `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns`
@@ -62,9 +71,9 @@ You can force Windows to download and install HSA again. You will have to remove
 5. Windows will find the device again, installs the driver and downloads and installs HSA back to the computer
 
 ## UHFT - UWD HSA Fix Tool (Coming soon!)
-You can use UHFT (UWD HSA Fix Tool) to detect any missing HSA's in Windows and install them. You will have to get the files for the installation packages by yourself because distributing them is not allowed. There is a few examples and empty filenames to get you started with the idea. UHFT is just surprisingly simple PowerShell script so you can modify it for for your needs. It is possible to create MEMCM compliance rule for HSA's to only detect how many devices you have that are missing HSA's.
+You can use UHFT (UWD HSA Fix Tool) to detect any missing HSA's in Windows and install them. You will have to get the files for the installation packages by yourself. There are few examples and empty filenames to get you started with the idea. UHFT is just a simple PowerShell script so you can modify it for for your needs. It is possible to create MEMCM compliance rule for HSA's to only detect how many devices you have that are missing HSA's.
 
-UHFT does not care about on computer models. It checks the missing HSA's that should be installed on the system so it is safe to run on all your systems.
+UHFT does not care about on computer models. It simply checks the missing HSA's that should be installed on the system so it is safe to run it on all your systems.
 
 ## Sideloading Apps
 You can sideload Store Apps (and HSA's) into Windows.
@@ -81,6 +90,8 @@ dism.exe /online /Add-ProvisionedAppxPackage /PackagePath:".\<package appx/appxb
 Put all the dependency packages in the same folder as HSA. Don't worry about the license.
 
 ## How to get Store link and download HSA install package
+
+**Notice!** Beginning from August 2020, you can find HSA's from computer manufacturer's driver download web page.
 As mentioned, although you cannot use Store search to find a HSA, you can find them using a Store "deep link".
 Without access to the HSA in Store, you cannot download the offline installation package.
 You can, however, work your way from the driver .inf file using PackageFamilyName to get the actual app link for the Store.
