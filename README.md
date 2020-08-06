@@ -84,7 +84,7 @@ You can sideload Store Apps (and HSA's) into Windows.
 If you use MEMCM (ConfigMgr) for Windows deployments or just offline service your images, you can sideload Apps with dism.exe into Windows.
 You can prevent Apps being deleted during first logon by changing the sideloading policy registry setting in Windows image to "Allow all trusted apps" and giving dism a switch REGION=ALL.
 While this method works also for HSA's, it does not help with automated driver installations as you are not giving any commands and **you will still need the install packages for the HSA's**.
-Sune Thomsens has written an excellent blog about this topic: (https://www.osdsune.com/home/blog/2020/deploy-uwp-osd)
+Sune Thomsen has written an excellent blog about this topic: (https://www.osdsune.com/home/blog/2020/deploy-uwp-osd)
 ### Online system
 You can add HSA's also in live online Windows. Jus use dism the following way:
 ```
