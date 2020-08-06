@@ -18,7 +18,7 @@ To install the missing HSA's, under folder `Packages` you will need to have  a f
 
 Just see the examples. The files already under `Packages` folder are just placeholders giving you the idea what is needed.
 
-### Detecting missing HSA's (never installed)
+### Detecting missing HSA's (app that have been never installed)
 Detecting HSA's that have never been installed but should be installed is tricky. You can scan the system to find device drivers that have a `pfn://` string in the .inf file:
 ```
 Get-ChildItem -Path "C:\Windows\System32\DriverStore\FileRepository\*.inf" -Recurse | Select-String "pfn://" -List | Select Path, Filename
