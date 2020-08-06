@@ -94,9 +94,10 @@ Put all the dependency packages in the same folder as HSA. Don't worry about the
 
 ## How to get Store link and download HSA install package
 
-**Notice!** Beginning from August 2020, you can find HSA's from computer manufacturer's driver download web page.
-As mentioned, although you cannot use Store search to find a HSA, you can find them using a Store "deep link".
-Without access to the HSA in Store, you cannot download the offline installation package.
+**Notice!** Beginning from August 2020, you can find HSA's from computer manufacturer's driver download web page. This is probably easier than the following way.
+
+As mentioned, although HSA's are hidden in the Store, you can find them using a Store "deep link".
+And without access to the HSA in Store, you cannot download the offline installation package.
 You can, however, work your way from the driver .inf file using PackageFamilyName to get the actual app link for the Store.
 Using that link in Store for Business or Store for Education, you can finally download HSA install package for offline use.
 
