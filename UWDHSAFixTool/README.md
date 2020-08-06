@@ -11,7 +11,7 @@ and checks is a corresponding HSA is installed on the system.
 Run `Is-HSACompliant.ps1` and it will return "Yes" the system is OK. If the system is missing one or more previously installed HSA's the script will return "No".
 You can use `Is-HSACompliant.ps1` as a MEMCM (ConfigMgr) compliance configuration item PowerShell script to detect if you have systems with deleted HSA's.
 
-## Fix deleted HSA's - detect and install
+## Detect and install (fix deleted HSA's)
 
 Run the script with administrative premissions or as a local system.
 ```
