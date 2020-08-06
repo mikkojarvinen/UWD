@@ -28,9 +28,9 @@ When a user signs in, Windows will populate a "copy" of the HSA app for the user
 
 ### HSA's in Microsoft Store
 Although HSA's are just Windows (modern) apps, they are a bit different.
-1. **Hidden**. You cannot find HSA's using Store's search. (But there is a way to find them.)
-2. **Only in Store**. Microsoft has a policy which prohibits computer manufacturers to distribute install packages for HSA's. (This is hopefully changing in the future.)
-3. **Not for users**. Because HSA is meant for a specific device driver, it should never be installed by or for the user.
+1. **Hidden**. You cannot find HSA's using Store's search. (But there is a way to find them, see below how to download a HSA from Store.)
+2. **Originally only in Store**. Microsoft had a policy that didn't allow computer manufacturers to distribute install packages for HSA's. This policy has been overturned and after August 2020 you can download HSA install packages from computer manufacturer's driver downloads web pages.
+3. **Not for users**. Because HSA is meant for a specific device driver, it should never be installed by or for the user. Only install - or provision to use fancier term - to a device.
 This brings us a few problems. How can you install HSA manually? What is HSA installation fails? What if the computer does not have network connection or access to the Microsoft Store?
 
 ### HSA automatic updates from Microsoft Store
