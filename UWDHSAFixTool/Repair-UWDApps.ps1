@@ -1,4 +1,4 @@
-﻿# Find missing HSA's and install them if install package is available in Packages folder
+# Find missing HSA's and install them if install package is available in Packages folder
 $InstalledPfns = Get-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns | Select-Object -ExpandProperty Property
 
 foreach ($InstalledPfn in $InstalledPfns)
@@ -11,16 +11,24 @@ foreach ($InstalledPfn in $InstalledPfns)
   else 
     # UWP HSA is missing, we will try to install the app
     {
-    Write-Output "Not found:  $InstalledPfn" 
-    $filepath = "powershell.exe -executionpolicy bypass -file '$PSScriptRoot\Packages\" + $InstalledPfn + "\install.ps1'"
-    Write-Output "  Running:  $filepath"
-    try
+    Write-Output "HSA not found:  $InstalledPfn"
+    $packagepath = "$PSScriptRoot\Packages\" + $InstalledPfn + "\install.ps1"
+    If (Test-Path -Path $packagepath)
       {
-      Invoke-Expression $filepath
+      $filepath = "powershell.exe -executionpolicy bypass -file '$PSScriptRoot\Packages\" + $InstalledPfn + "\install.ps1'"
+      Write-Output "  Running:  $filepath"
+      try
+        {
+        Invoke-Expression $filepath
+        }
+      catch
+        {
+        Write-Output "    Error:  $_"
+        }
       }
-    catch
+    Else
       {
-      Write-Output "    Error:  $_"
+         Write-Output "File not found:  $packagepath"
       }
     }
   }
