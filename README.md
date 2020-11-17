@@ -30,7 +30,7 @@ When a user signs in, Windows will populate a "copy" of the HSA app for the user
 ### HSA's in Microsoft Store
 Although HSA's are just Windows (modern) apps, they are a bit different.
 1. **Hidden**. You cannot find HSA's using Store's search. (But there is a way to find them if you have Store "deep link". See below how to download a HSA from Store.)
-2. **Originally only in Store**. Microsoft had a policy that didn't allow computer manufacturers to distribute install packages for HSA's. This policy has been overturned and after August 2020 you can download HSA install packages from computer manufacturer's driver downloads web pages.
+2. **Originally only in Store**. Microsoft had a policy that didn't allow computer manufacturers to distribute install packages for HSA's. This policy has been overturned and **since August 2020 you can download HSA install packages from computer manufacturer's driver downloads web pages**.
 3. **Not for users**. Because HSA is meant for a specific device driver, it should never be installed by or for the user. Only install - or provision to use fancier term - to a device.
 This brings us a few problems. How can you install HSA manually? What if HSA installation fails? What if the computer does not have network connection or access to the Microsoft Store?
 
@@ -45,10 +45,8 @@ There is a bug in Windows 1809 and newer, which affects Windows and driver insta
 For example, without it's HSA app, Wawes MaxxAudio driver cannot operate computer's 3.5mm headphone jack rendering the connector completely unusable.
 If first user logon has already happened, delete operations will not happen.
 
-It is questonable if Microsoft is ever going to fix this. In the meantime, we just need to survive.
-
 To reproduce this bug, you'll need a computer which has at least one device with UWD driver. Most likely any modern laptop will do the job.
-1. Install Windows from unmodified .iso image
+1. Install Windows (versios 1809-1909) from unmodified .iso image
 2. Give Windows internet connection but do not finish OOBE or sign in
 3. Let Windows discover devices and find drivers for them from WU (Shift+F10, devmgmt.msc, see devices being detected)
 4. Let UWD driver(s) to download and install HSA from Microsoft Store (Shift+F10, regedit.exe, see HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns)
