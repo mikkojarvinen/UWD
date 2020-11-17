@@ -38,6 +38,9 @@ This brings us a few problems. How can you install HSA manually? What if HSA ins
 If Windows has access to the Microsoft Store, installed HSA's will be automatically updated if newer version is available on Store. It does not matter if HSA has been installed the "natural way" during UWD install process, sideloaded to the offline image or (re)installed to an online live system from .appx\[bundle\]. If you are offline servicing HSA's this means you don't have to worry too much about deploying the latest version. This is good news.
 
 ## Windows has a bug: HSA's will be deleted!
+
+**Update!** Microsoft has fixed this issue in Windows 10 20H2.
+
 There is a bug in Windows 1809 and newer, which affects Windows and driver installations. _During first user logon Windows will delete external sideloaded apps._ This means that **all HSA's will also be deleted** and the driver will be broken. How badly, depends on the driver. You might just end up missing a somewhat useless App or in the worst case the functionality of the driver depends on the existence of HSA.
 For example, without it's HSA app, Wawes MaxxAudio driver cannot operate computer's 3.5mm headphone jack rendering the connector completely unusable.
 If first user logon has already happened, delete operations will not happen.
