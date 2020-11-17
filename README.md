@@ -41,12 +41,12 @@ If Windows has access to the Microsoft Store, installed HSA's will be automatica
 
 **Update!** Microsoft has fixed this issue in Windows 10 20H2.
 
-There is a bug in Windows 1809 and newer, which affects Windows and driver installations. _During first user logon Windows will delete external sideloaded apps._ This means that **all HSA's will also be deleted** and the driver will be broken. How badly, depends on the driver. You might just end up missing a somewhat useless App or in the worst case the functionality of the driver depends on the existence of HSA.
-For example, without it's HSA app, Wawes MaxxAudio driver cannot operate computer's 3.5mm headphone jack rendering the connector completely unusable.
+There is a bug in Windows 1809 and newer until 20H2, which affects Windows and driver installations. _During first user logon Windows will delete external sideloaded apps._ This means that **all HSA's will also be deleted** and the driver will be broken. How badly, depends on the driver. You might just end up missing a somewhat useless App or in the worst case the functionality of the driver depends on the existence of HSA.
+For example, without it's HSA app, Wawes MaxxAudio driver cannot operate computer's 3.5mm headphone jack rendering the connector completely unusable. Without Intel Graphics Control Panel you willl get a picture on your screen but are missing all the Intel's video adjustment goodies (?) HSA provides.
 If first user logon has already happened, delete operations will not happen.
 
 To reproduce this bug, you'll need a computer which has at least one device with UWD driver. Most likely any modern laptop will do the job.
-1. Install Windows (versios 1809-1909) from unmodified .iso image
+1. Install Windows (versions 1809-20H1) from unmodified .iso image
 2. Give Windows internet connection but do not finish OOBE or sign in
 3. Let Windows discover devices and find drivers for them from WU (Shift+F10, devmgmt.msc, see devices being detected)
 4. Let UWD driver(s) to download and install HSA from Microsoft Store (Shift+F10, regedit.exe, see HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns)
