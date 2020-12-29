@@ -1,4 +1,22 @@
 # Universal Windows Drivers for ITPros
+
+**Table of Contents**
+- [Universal Windows Drivers for ITPros](#universal-windows-drivers-for-itpros)
+  * [What is Universal Windows Driver](#what-is-universal-windows-driver)
+    + [HSA's in Microsoft Store](#hsas-in-microsoft-store)
+    + [HSA automatic updates from Microsoft Store](#hsa-automatic-updates-from-microsoft-store)
+  * [Problematic UWD drivers](#problematic-uwd-drivers)
+    + [Waves MaxxAudio Pro for Dell 2020: HSA not installed](#waves-maxxaudio-pro-for-dell-2020-hsa-not-installed)
+    + [AMD Radeon Software: No installation package](#amd-radeon-software-no-installation-package)
+  * [Windows has a bug: HSA's will be deleted!](#windows-has-a-bug-hsas-will-be-deleted)
+    + [Detecting deleted HSA's](#detecting-deleted-hsas)
+    + [How to manually fix deleted HSA's](#how-to-manually-fix-deleted-hsas)
+  * [UHFT - UWD HSA Fix Tool](#uhft---uwd-hsa-fix-tool)
+  * [Sideloading Apps](#sideloading-apps)
+    + [MEMCM](#memcm)
+    + [Online system](#online-system)
+  * [How to get Store link and download HSA install package](#how-to-get-store-link-and-download-hsa-install-package)
+
 So, you are an ITPro, sysdamin, systems architect or just a geek working with Windows deployments.
 Here you can find all the important information what every ITPro should know about Universal Windows Drivers (UWD) and Hardware Support Apps (HSA).
 From ITPro's perspective, there are some severe design issues and problems with UWD's. If you are not careful, you will end up having computers with broken drivers.
@@ -36,6 +54,19 @@ This brings us a few problems. How can you install HSA manually? What if HSA ins
 
 ### HSA automatic updates from Microsoft Store
 If Windows has access to the Microsoft Store, installed HSA's will be automatically updated if newer version is available on Store. It does not matter if HSA has been installed the "natural way" during UWD install process, sideloaded to the offline image or (re)installed to an online live system from .appx\[bundle\]. If you are offline servicing HSA's this means you don't have to worry too much about deploying the latest version. This is good news.
+
+## Problematic UWD drivers
+UWD and HSA installations work very well when every part of the process is working as expected. Unfortunately, some drivers seems to have problems making the installations difficult or impossible.
+
+### Waves MaxxAudio Pro for Dell 2020: HSA not installed
+There seems to be an issue in `WavesAPO9De.inf` driver and the HSA "Waves MaxxAudio Pro for Dell 2020" never gets installed from the Store. One way to fix this automatically is to "stamp" the computers where the driver is used
+```
+reg.exe add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceSetup\InstalledPfns /v WavesAudio.MaxxAudioProforDell2020_fh4rh281wavaa /t REG_DWORD /d 1 /f
+```
+and then let the [UWD HSA Fix Tool](#uhft---uwd-hsa-fix-tool) take care of the HSA installation. Of course, you will need to first download the installation package from Dell Support site and then add it to the `packages` folder of the tool.
+
+### AMD Radeon Software: No installation package
+Installation package for the "AMD Radeon Software" cannot be downloaded from the Microsoft Store. Withtout package, there is no way to do offline installs. If this app has been deleted because of the [bug in Windows](#windows-has-a-bug-hsas-will-be-deleted) the you can use the [manual driver and HSA reinstallation fix](#how-to-manually-fix-deleted-hsas).
 
 ## Windows has a bug: HSA's will be deleted!
 
